@@ -130,7 +130,7 @@ func parseAsUintValue(sv string, min, max, def uint) uint {
 		return max
 	}
 	if min != 0 && uint(iv) < min {
-		return max
+		return min
 	}
 	return uint(iv)
 }
