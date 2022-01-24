@@ -47,7 +47,7 @@ type SearchOptions struct {
 	ExcludeFileRegexp 	string
 	Offset            	int
 	Limit             	int
-	FileMatchLimit	 	uint
+	MatchLimit	 		uint
 }
 
 type Match struct {

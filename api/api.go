@@ -18,8 +18,8 @@ import (
 const (
 	defaultLinesOfContext uint = 2
 	maxLinesOfContext     uint = 20
-	defaultFileMatchLimit uint = 5000
-	maxFileMatchLimit	  uint = 500000
+	defaultMatchLimit 	  uint = 5000
+	maxMatchLimit	  	  uint = 500000
 )
 
 type Stats struct {
@@ -188,11 +188,11 @@ func Setup(m *http.ServeMux, idx map[string]*searcher.Searcher) {
 			0,
 			maxLinesOfContext,
 			defaultLinesOfContext)
-		opt.FileMatchLimit = parseAsUintValue(
+		opt.MatchLimit = parseAsUintValue(
 			r.FormValue("matchLimit"),
 			0,
-			maxFileMatchLimit,
-			defaultFileMatchLimit)
+			maxMatchLimit,
+			defaultMatchLimit)
 
 		var filesOpened int
 		var durationMs int
