@@ -17,7 +17,6 @@ import (
 )
 
 const (
-	matchLimit               = 5000
 	manifestFilename         = "metadata.gob"
 	excludedFileJsonFilename = "excluded_files.json"
 	filePeekSize             = 2048
@@ -41,13 +40,14 @@ type IndexOptions struct {
 }
 
 type SearchOptions struct {
-	IgnoreCase        bool
-	LiteralSearch     bool
-	LinesOfContext    uint
-	FileRegexp        string
-	ExcludeFileRegexp string
-	Offset            int
-	Limit             int
+	IgnoreCase        	bool
+	LiteralSearch     	bool
+	LinesOfContext    	uint
+	FileRegexp        	string
+	ExcludeFileRegexp 	string
+	Offset            	int
+	Limit             	int
+	FileMatchLimit	 	uint
 }
 
 type Match struct {
@@ -215,8 +215,8 @@ func (n *Index) Search(pat string, opt *SearchOptions) (*SearchResponse, error) 
 					After:      toStrings(after),
 				})
 
-				if matchesCollected > matchLimit {
-					return false, fmt.Errorf("search exceeds limit on matches: %d", matchLimit)
+				if uint(matchesCollected) > opt.FileMatchLimit {
+					return false, fmt.Errorf("search exceeds limit on matches: %d", opt.FileMatchLimit)
 				}
 
 				return true, nil
